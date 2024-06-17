@@ -1,0 +1,12 @@
+/Users/fujiabin/CdfProjects/cdfsunrise/openapi-sdk/openapi-sdk-csharp/openapi-sdk/bin/Debug/net6.0/openapi-sdk.deps.json
+/Users/fujiabin/CdfProjects/cdfsunrise/openapi-sdk/openapi-sdk-csharp/openapi-sdk/bin/Debug/net6.0/openapi-sdk.dll
+/Users/fujiabin/CdfProjects/cdfsunrise/openapi-sdk/openapi-sdk-csharp/openapi-sdk/bin/Debug/net6.0/ref/openapi-sdk.dll
+/Users/fujiabin/CdfProjects/cdfsunrise/openapi-sdk/openapi-sdk-csharp/openapi-sdk/bin/Debug/net6.0/openapi-sdk.pdb
+/Users/fujiabin/CdfProjects/cdfsunrise/openapi-sdk/openapi-sdk-csharp/openapi-sdk/obj/Debug/net6.0/openapi-sdk.GeneratedMSBuildEditorConfig.editorconfig
+/Users/fujiabin/CdfProjects/cdfsunrise/openapi-sdk/openapi-sdk-csharp/openapi-sdk/obj/Debug/net6.0/openapi-sdk.AssemblyInfoInputs.cache
+/Users/fujiabin/CdfProjects/cdfsunrise/openapi-sdk/openapi-sdk-csharp/openapi-sdk/obj/Debug/net6.0/openapi-sdk.AssemblyInfo.cs
+/Users/fujiabin/CdfProjects/cdfsunrise/openapi-sdk/openapi-sdk-csharp/openapi-sdk/obj/Debug/net6.0/openapi-sdk.csproj.CoreCompileInputs.cache
+/Users/fujiabin/CdfProjects/cdfsunrise/openapi-sdk/openapi-sdk-csharp/openapi-sdk/obj/Debug/net6.0/openapi-sdk.dll
+/Users/fujiabin/CdfProjects/cdfsunrise/openapi-sdk/openapi-sdk-csharp/openapi-sdk/obj/Debug/net6.0/ref/openapi-sdk.dll
+/Users/fujiabin/CdfProjects/cdfsunrise/openapi-sdk/openapi-sdk-csharp/openapi-sdk/obj/Debug/net6.0/openapi-sdk.pdb
+/Users/fujiabin/CdfProjects/cdfsunrise/openapi-sdk/openapi-sdk-csharp/openapi-sdk/obj/Debug/net6.0/openapi-sdk.csproj.AssemblyReference.cache
