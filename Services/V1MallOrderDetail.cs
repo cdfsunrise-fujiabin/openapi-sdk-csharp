@@ -1,0 +1,77 @@
+using System;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+using openapi_sdk.Utils;
+
+namespace openapi_sdk.Services
+{
+    public class V1MallOrderDetail {
+        public class V1MallOrderDetailResponse {
+            [JsonProperty("requestId")]
+            public string RequestId { get; set; }
+
+            [JsonProperty("code")]
+            public int Code { get; set; }
+
+            [JsonProperty("message")]
+            public string Message { get; set; }
+
+            [JsonProperty("data")]
+            public string Data { get; set; }
+        }
+        
+		public class BaseRequest {
+			[JsonProperty("appid")]
+			public string Appid { get; set; }
+
+			[JsonProperty("data")]
+			public string Data { get; set; }
+
+			[JsonProperty("dataEncryptMethod")]
+			public string DataEncryptMethod { get; set; }
+
+			[JsonProperty("sign")]
+			public string Sign { get; set; }
+
+			[JsonProperty("signEncryptMethod")]
+			public string SignEncryptMethod { get; set; }
+
+			[JsonProperty("timestamp")]
+			public string Timestamp { get; set; }
+		}
+		
+	
+
+        private HttpClient _httpClient;
+
+        public V1MallOrderDetail(string host) {
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri(host);
+            _httpClient = client;
+        }
+
+        /*V1MallOrderDetail
+         *Description: 【商户入驻】- 查询订单详情
+         * @param: body BaseRequest BaseRequest 必填项
+         * @return: *V1MallOrderDetailResponse
+        */
+        public V1MallOrderDetailResponse? Send(string authToken, BaseRequest body) {
+            try
+            {
+                HttpHelper httpHelper = new HttpHelper(this._httpClient);
+                string bodyStr = JsonConvert.SerializeObject(body);
+                string url = this._httpClient.BaseAddress + string.Format("/v1/mall/order/detail").TrimStart('/');
+                var resp =  httpHelper.PostAsync(url, bodyStr);
+
+                var result = resp.Result;
+                return JsonConvert.DeserializeObject<V1MallOrderDetailResponse>(result);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
+        }
+    }
+}

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -5,6 +6,8 @@ namespace openapi_sdk.Utils
 {
     public class SignHelper
     {
+        private static DateTime timeStampStartTime = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+
         public static string Sign(SortedDictionary<string, string> sortedDict)
         {
             if (sortedDict == null)
@@ -19,6 +22,12 @@ namespace openapi_sdk.Utils
             }
 
             return sb.ToString().TrimEnd('&');
+        }
+
+        public static string GetCurrentTimestampSeconds()
+        {
+            var ts = (DateTime.Now.ToUniversalTime() - timeStampStartTime).TotalSeconds;
+            return ts.ToString();
         }
     }
 }

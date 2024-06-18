@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "bZeHp/mT0+mG8KJmRnzOu6RgZtXa8m3f8LNRnyPKeiGpUngP7tOlFgjyxRRn5zJ79ivxm87lVJ7IsN/C/Cx36Q==",
+  "dgSpecHash": "wXBK0mfFa8ZdMRY25ZW+urnwSYj3o5PCAtCff17rIItj9gWo5+T7Glrir3tU36Q0++bv/JwOrVoTYTJ9l/fgNg==",
   "success": true,
-  "projectFilePath": "/Users/fujiabin/CdfProjects/cdfsunrise/openapi-sdk/openapi-sdk-csharp/openapi-sdk/openapi-sdk.csproj",
+  "projectFilePath": "/Users/fujiabin/CdfProjects/cdfsunrise/openapi-sdk/openapi-sdk-cs/openapi-sdk/openapi-sdk.csproj",
   "expectedPackageFiles": [
     "/Users/fujiabin/.nuget/packages/newtonsoft.json/13.0.3/newtonsoft.json.13.0.3.nupkg.sha512",
     "/Users/fujiabin/.nuget/packages/portable.bouncycastle/1.9.0/portable.bouncycastle.1.9.0.nupkg.sha512"

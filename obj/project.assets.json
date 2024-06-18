@@ -89,11 +89,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/fujiabin/CdfProjects/cdfsunrise/openapi-sdk/openapi-sdk-csharp/openapi-sdk/openapi-sdk.csproj",
+      "projectUniqueName": "/Users/fujiabin/CdfProjects/cdfsunrise/openapi-sdk/openapi-sdk-cs/openapi-sdk/openapi-sdk.csproj",
       "projectName": "openapi-sdk",
-      "projectPath": "/Users/fujiabin/CdfProjects/cdfsunrise/openapi-sdk/openapi-sdk-csharp/openapi-sdk/openapi-sdk.csproj",
+      "projectPath": "/Users/fujiabin/CdfProjects/cdfsunrise/openapi-sdk/openapi-sdk-cs/openapi-sdk/openapi-sdk.csproj",
       "packagesPath": "/Users/fujiabin/.nuget/packages/",
-      "outputPath": "/Users/fujiabin/CdfProjects/cdfsunrise/openapi-sdk/openapi-sdk-csharp/openapi-sdk/obj/",
+      "outputPath": "/Users/fujiabin/CdfProjects/cdfsunrise/openapi-sdk/openapi-sdk-cs/openapi-sdk/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/fujiabin/.nuget/NuGet/NuGet.Config"
