@@ -21,12 +21,12 @@ namespace openapi_sdk.Utils
                 sb = sb.AppendFormat("{0}={1}&", item.Key, item.Value);
             }
 
-            return sb.ToString().TrimEnd('&');
+            return RsaHelper.Base64UrlEncode(Md5Helper.ComputeMD5Hash(sb.ToString().TrimEnd('&')));
         }
 
         public static string GetCurrentTimestampSeconds()
         {
-            var ts = (DateTime.Now.ToUniversalTime() - timeStampStartTime).TotalSeconds;
+            var ts = (long)(DateTime.Now.ToUniversalTime() - timeStampStartTime).TotalSeconds;
             return ts.ToString();
         }
     }

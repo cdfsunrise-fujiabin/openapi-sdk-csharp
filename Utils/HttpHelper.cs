@@ -14,7 +14,7 @@ namespace openapi_sdk.Utils
             _httpClient = httpClient;
         }
 
-        public HttpHelper(HttpClient httpClient, Dictionary<string, string>? headers)
+        public HttpHelper(HttpClient httpClient, Dictionary<string, string> headers)
         {
             _httpClient = httpClient;
             if (headers != null)

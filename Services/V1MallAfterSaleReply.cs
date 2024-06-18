@@ -59,7 +59,11 @@ namespace openapi_sdk.Services
         public V1MallAfterSaleReplyResponse? Send(string authToken, BaseRequest body) {
             try
             {
-                HttpHelper httpHelper = new HttpHelper(this._httpClient);
+                Dictionary<string, string> headers = new Dictionary<string, string>
+                {
+                    { "Authorization", authToken }
+                };
+                HttpHelper httpHelper = new HttpHelper(this._httpClient, headers);
                 string bodyStr = JsonConvert.SerializeObject(body);
                 string url = this._httpClient.BaseAddress + string.Format("/v1/mall/after/sale/reply").TrimStart('/');
                 var resp =  httpHelper.PostAsync(url, bodyStr);
