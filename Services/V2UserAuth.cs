@@ -18,16 +18,17 @@ namespace openapi_sdk.Services
             public string Message { get; set; }
 
             [JsonProperty("data")]
-            public V2UserAuthData Data { get; set; }
+            public AuthData Data { get; set; }
         }
 
-        public class V2UserAuthData
+        public class AuthData
         {
             [JsonProperty("auth")]
-            public V2UserAuthDetail Auth { get; set; }
+            public AuthDetail Auth { get; set; }
         }
 
-        public class V2UserAuthDetail
+
+        public class AuthDetail
         {
             [JsonProperty("access_token")]
             public string AccessToken { get; set; }
@@ -35,16 +36,14 @@ namespace openapi_sdk.Services
             [JsonProperty("expires_in")]
             public long ExpiresIn { get; set; }
         }
-
-        public class OpenAuthReq {
+        
+		public class OpenAuthReq {
 			[JsonProperty("appid")]
 			public string Appid { get; set; }
 
 			[JsonProperty("password")]
 			public string Password { get; set; }
 		}
-		
-	
 
         private HttpClient _httpClient;
 
