@@ -2,6 +2,7 @@
 using System.Security.Cryptography.X509Certificates;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Parameters;
+using Org.BouncyCastle.OpenSsl;
 using Org.BouncyCastle.Security;
 
 namespace openapi_sdk.Utils
@@ -30,7 +31,7 @@ namespace openapi_sdk.Utils
             }
             else
             {
-                return LoadPrivateKeyPKCS8(privateKeyStr);
+                return CreateRsaProviderFromPrivateKey(privateKeyStr);
             }
         }
 
@@ -185,51 +186,63 @@ namespace openapi_sdk.Utils
             return count;
         }
 
-        /// <summary>
-        /// PKCS8 文本转RSACryptoServiceProvider 对象
-        /// </summary>
-        /// <param name="privateKeyPemPkcs8"></param>
-        /// <returns></returns>
-        public static RSACryptoServiceProvider LoadPrivateKeyPKCS8(string privateKeyPemPkcs8)
+        public static RSACryptoServiceProvider CreateRsaProviderFromPrivateKey(string privateKeyPEM)
         {
+            PemReader pemReader = new PemReader(new System.IO.StringReader(privateKeyPEM));
+            AsymmetricCipherKeyPair keyPair = (AsymmetricCipherKeyPair)pemReader.ReadObject();
+            RSAParameters rsaParams = DotNetUtilities.ToRSAParameters((Org.BouncyCastle.Crypto.Parameters.RsaPrivateCrtKeyParameters)keyPair.Private);
 
-            try
-            {
-                //PKCS8是“BEGIN PRIVATE KEY”
-                privateKeyPemPkcs8 = privateKeyPemPkcs8.Replace("-----BEGIN RSA PRIVATE KEY-----", "").Replace("-----END RSA PRIVATE KEY-----", "").Replace("\r", "").Replace("\n", "").Trim();
-                privateKeyPemPkcs8 = privateKeyPemPkcs8.Replace("-----BEGIN PRIVATE KEY-----", "").Replace("-----END PRIVATE KEY-----", "").Replace("\r", "").Replace("\n", "").Trim();
+            RSACryptoServiceProvider rsaProvider = new RSACryptoServiceProvider();
+            rsaProvider.ImportParameters(rsaParams);
 
-                //pkcs8 文本先转为 .NET XML 私钥字符串
-                string privateKeyXml = RSAPrivateKeyJava2DotNet(privateKeyPemPkcs8);
-
-                RSACryptoServiceProvider publicRsa = new RSACryptoServiceProvider();
-                publicRsa.FromXmlString(privateKeyXml);
-                return publicRsa;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            return rsaProvider;
         }
 
-        /// <summary>
-        /// PKCS8 私钥文本 转 .NET XML 私钥文本
-        /// </summary>
-        /// <param name="privateKeyPemPkcs8"></param>
-        /// <returns></returns>
-        public static string RSAPrivateKeyJava2DotNet(string privateKeyPemPkcs8)
-        {
-            RsaPrivateCrtKeyParameters privateKeyParam = (RsaPrivateCrtKeyParameters)PrivateKeyFactory.CreateKey(Convert.FromBase64String(privateKeyPemPkcs8));
-            return string.Format("<RSAKeyValue><Modulus>{0}</Modulus><Exponent>{1}</Exponent><P>{2}</P><Q>{3}</Q><DP>{4}</DP><DQ>{5}</DQ><InverseQ>{6}</InverseQ><D>{7}</D></RSAKeyValue>",
-            Convert.ToBase64String(privateKeyParam.Modulus.ToByteArrayUnsigned()),
-            Convert.ToBase64String(privateKeyParam.PublicExponent.ToByteArrayUnsigned()),
-            Convert.ToBase64String(privateKeyParam.P.ToByteArrayUnsigned()),
-            Convert.ToBase64String(privateKeyParam.Q.ToByteArrayUnsigned()),
-            Convert.ToBase64String(privateKeyParam.DP.ToByteArrayUnsigned()),
-            Convert.ToBase64String(privateKeyParam.DQ.ToByteArrayUnsigned()),
-            Convert.ToBase64String(privateKeyParam.QInv.ToByteArrayUnsigned()),
-            Convert.ToBase64String(privateKeyParam.Exponent.ToByteArrayUnsigned()));
-        }
+        ///// <summary>
+        ///// PKCS8 文本转RSACryptoServiceProvider 对象
+        ///// </summary>
+        ///// <param name="privateKeyPemPkcs8"></param>
+        ///// <returns></returns>
+        //public static RSACryptoServiceProvider LoadPrivateKeyPKCS8(string privateKeyPemPkcs8)
+        //{
+
+        //    try
+        //    {
+        //        //PKCS8是“BEGIN PRIVATE KEY”
+        //        privateKeyPemPkcs8 = privateKeyPemPkcs8.Replace("-----BEGIN RSA PRIVATE KEY-----", "").Replace("-----END RSA PRIVATE KEY-----", "").Replace("\r", "").Replace("\n", "").Trim();
+        //        privateKeyPemPkcs8 = privateKeyPemPkcs8.Replace("-----BEGIN PRIVATE KEY-----", "").Replace("-----END PRIVATE KEY-----", "").Replace("\r", "").Replace("\n", "").Trim();
+
+        //        //pkcs8 文本先转为 .NET XML 私钥字符串
+        //        string privateKeyXml = RSAPrivateKeyJava2DotNet(privateKeyPemPkcs8);
+
+        //        RSACryptoServiceProvider publicRsa = new RSACryptoServiceProvider();
+        //        publicRsa.FromXmlString(privateKeyXml);
+        //        return publicRsa;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
+
+        ///// <summary>
+        ///// PKCS8 私钥文本 转 .NET XML 私钥文本
+        ///// </summary>
+        ///// <param name="privateKeyPemPkcs8"></param>
+        ///// <returns></returns>
+        //public static string RSAPrivateKeyJava2DotNet(string privateKeyPemPkcs8)
+        //{
+        //    RsaPrivateCrtKeyParameters privateKeyParam = (RsaPrivateCrtKeyParameters)PrivateKeyFactory.CreateKey(Convert.FromBase64String(privateKeyPemPkcs8));
+        //    return string.Format("<RSAKeyValue><Modulus>{0}</Modulus><Exponent>{1}</Exponent><P>{2}</P><Q>{3}</Q><DP>{4}</DP><DQ>{5}</DQ><InverseQ>{6}</InverseQ><D>{7}</D></RSAKeyValue>",
+        //    Convert.ToBase64String(privateKeyParam.Modulus.ToByteArrayUnsigned()),
+        //    Convert.ToBase64String(privateKeyParam.PublicExponent.ToByteArrayUnsigned()),
+        //    Convert.ToBase64String(privateKeyParam.P.ToByteArrayUnsigned()),
+        //    Convert.ToBase64String(privateKeyParam.Q.ToByteArrayUnsigned()),
+        //    Convert.ToBase64String(privateKeyParam.DP.ToByteArrayUnsigned()),
+        //    Convert.ToBase64String(privateKeyParam.DQ.ToByteArrayUnsigned()),
+        //    Convert.ToBase64String(privateKeyParam.QInv.ToByteArrayUnsigned()),
+        //    Convert.ToBase64String(privateKeyParam.Exponent.ToByteArrayUnsigned()));
+        //}
 
         #endregion
 

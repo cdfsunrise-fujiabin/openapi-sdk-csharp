@@ -7,8 +7,8 @@ using openapi_sdk.Utils;
 
 namespace openapi_sdk.Services
 {
-    public class V1MallOrderDetail {
-        public class V1MallOrderDetailResponse {
+    public class V1QueryCpsGoods {
+        public class V1QueryCpsGoodsResponse {
             [JsonProperty("requestId")]
             public string RequestId { get; set; }
 
@@ -22,7 +22,7 @@ namespace openapi_sdk.Services
             public string Data { get; set; }
         }
         
-		public class BaseRequest {
+		public class OpenDataReq {
 			[JsonProperty("appid")]
 			public string Appid { get; set; }
 
@@ -46,18 +46,18 @@ namespace openapi_sdk.Services
 
         private HttpClient _httpClient;
 
-        public V1MallOrderDetail(string host) {
+        public V1QueryCpsGoods(string host) {
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri(host);
             _httpClient = client;
         }
 
-        /*V1MallOrderDetail
-         *Description: 【商户入驻】- 查询订单详情
-         * @param: body BaseRequest BaseRequest 必填项
-         * @return: *V1MallOrderDetailResponse
+        /*V1QueryCpsGoods
+         *Description: 开放平台cps商品查询
+         * @param: body OpenDataReq OpenDataReq 必填项
+         * @return: *V1QueryCpsGoodsResponse
         */
-        public V1MallOrderDetailResponse? Send(string authToken, BaseRequest body) {
+        public V1QueryCpsGoodsResponse? Send(string authToken, OpenDataReq body) {
             try
             {
                 Dictionary<string, string> headers = new Dictionary<string, string>
@@ -66,11 +66,11 @@ namespace openapi_sdk.Services
                 };
                 HttpHelper httpHelper = new HttpHelper(this._httpClient, headers);
                 string bodyStr = JsonConvert.SerializeObject(body);
-                string url = this._httpClient.BaseAddress + string.Format("/v1/mall/order/detail").TrimStart('/');
+                string url = this._httpClient.BaseAddress + string.Format("/v1/query/cps/goods").TrimStart('/');
                 var resp =  httpHelper.PostAsync(url, bodyStr);
 
                 var result = resp.Result;
-                return JsonConvert.DeserializeObject<V1MallOrderDetailResponse>(result);
+                return JsonConvert.DeserializeObject<V1QueryCpsGoodsResponse>(result);
             }
             catch (Exception ex)
             {

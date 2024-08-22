@@ -21,3 +21,4 @@
 /Users/fujiabin/CdfProjects/cdfsunrise/openapi-sdk/openapi-sdk-cs/openapi-sdk/obj/Debug/net6.0/openapi-sdk.dll
 /Users/fujiabin/CdfProjects/cdfsunrise/openapi-sdk/openapi-sdk-cs/openapi-sdk/obj/Debug/net6.0/ref/openapi-sdk.dll
 /Users/fujiabin/CdfProjects/cdfsunrise/openapi-sdk/openapi-sdk-cs/openapi-sdk/obj/Debug/net6.0/openapi-sdk.pdb
+/Users/fujiabin/CdfProjects/cdfsunrise/openapi-sdk/openapi-sdk-cs/openapi-sdk/obj/Debug/net6.0/openapi-sdk.csproj.AssemblyReference.cache

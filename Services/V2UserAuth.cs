@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using openapi_sdk.Utils;
 
+
 namespace openapi_sdk.Services
 {
     public class V2UserAuth {
@@ -18,23 +19,7 @@ namespace openapi_sdk.Services
             public string Message { get; set; }
 
             [JsonProperty("data")]
-            public AuthData Data { get; set; }
-        }
-
-        public class AuthData
-        {
-            [JsonProperty("auth")]
-            public AuthDetail Auth { get; set; }
-        }
-
-
-        public class AuthDetail
-        {
-            [JsonProperty("access_token")]
-            public string AccessToken { get; set; }
-
-            [JsonProperty("expires_in")]
-            public long ExpiresIn { get; set; }
+            public string Data { get; set; }
         }
         
 		public class OpenAuthReq {
@@ -44,6 +29,8 @@ namespace openapi_sdk.Services
 			[JsonProperty("password")]
 			public string Password { get; set; }
 		}
+		
+	
 
         private HttpClient _httpClient;
 
